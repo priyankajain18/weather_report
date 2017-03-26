@@ -1,0 +1,43 @@
+/* Index Page CSS */
+.nav > li > a{
+    padding: 10px 30px !important;
+}
+.welcome-txt{
+    text-align: center;
+    font-weight: 300;
+    color: #999999;
+    font-size: 35px;
+    margin-top: 15%;
+    position: relative;
+}
+.index-btn{
+    width: 30% !important;
+}
+.search-btn, .add-btn{
+    font-size: 18px !important;
+    font-weight: 200 !important;
+    color: #999999 !important;
+}
+.btn-default:hover{
+    background-color: #f2f2f2 !important;
+}
+.button-container{
+    margin-top: 2% !important;
+    margin-left: 28% !important;
+    position: relative;
+}
+
+/* Search Station Page CSS */
+.search-txt{
+    float: right;
+    font-weight: 300;
+    color: #999999;
+    font-size: 30px;
+    margin-top: 2%;
+}
+.search-dropdown{
+     margin-left: 37%;
+}
+.search-data{
+    margin-left: 5%;
+}
