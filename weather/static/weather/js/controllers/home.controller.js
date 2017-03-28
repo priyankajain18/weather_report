@@ -1,4 +1,4 @@
-app.controller("HomeController", function($scope, $http){
+app.controller("HomeController", function($scope, $http, $window){
     $scope.showAllData = false;
 
     angular.element(document).ready(function () {
@@ -12,24 +12,27 @@ app.controller("HomeController", function($scope, $http){
             $scope.$eventStationSelect = $(".station-dropdown");
             $scope.$eventStationSelect.on("select2:close", function (event){
                 $scope.showAllData = false;
-                $http.get('http://api.openweathermap.org/data/2.5/weather?id='+$scope.$eventStationSelect.val()+'&APPID='+api_key)
-                .success(function(response){
-                    $scope.showAllData = true;
-                    $scope.response = response;
-                    $scope.clouds = $scope.getCloudiness($scope.response);
-                    $scope.sunrise = new Date($scope.response.sys.sunrise*1000);
-                    $scope.sunset = new Date($scope.response.sys.sunset*1000)
-                });
 
-                $http.get('http://api.openweathermap.org/data/2.5/forecast?id='+$scope.$eventStationSelect.val()+'&APPID='+api_key)
-                .success(function(response){
-                    $scope.forecast = response;
+                if($scope.$eventStationSelect.val()){
+                    $http.get('http://api.openweathermap.org/data/2.5/weather?id='+$scope.$eventStationSelect.val()+'&APPID='+api_key)
+                    .success(function(response){
+                        $scope.showAllData = true;
+                        $scope.response = response;
+                        $scope.clouds = $scope.getCloudiness($scope.response);
+                        $scope.sunrise = new Date($scope.response.sys.sunrise*1000);
+                        $scope.sunset = new Date($scope.response.sys.sunset*1000)
+                    });
 
-                    $scope.getTemperatureChartData($scope.forecast);
-                    $scope.getPressureChartData($scope.forecast);
-                    $scope.getWindChartData($scope.forecast);
-                    $scope.getHumidityChartData($scope.forecast);
-                });
+                    $http.get('http://api.openweathermap.org/data/2.5/forecast?id='+$scope.$eventStationSelect.val()+'&APPID='+api_key)
+                    .success(function(response){
+                        $scope.forecast = response;
+
+                        $scope.getTemperatureChartData($scope.forecast);
+                        $scope.getPressureChartData($scope.forecast);
+                        $scope.getWindChartData($scope.forecast);
+                        $scope.getHumidityChartData($scope.forecast);
+                    });
+                }
             });
 
             $scope.getCloudiness = function(response){
@@ -44,7 +47,7 @@ app.controller("HomeController", function($scope, $http){
             };
 
             $scope.getTemperatureChartData = function(forecast){
-                var temperatureArray = _.map(forecast.list, function(i){ return i.main.temp-273.15; });
+                var temperatureArray = _.map(forecast.list, function(i){t = (i.main.temp-273.15).toFixed(2); return Number(t) });
                 var dateArray = _.map(forecast.list, function(i){ return i.dt_txt; });
 
                 Highcharts.chart('temperature-chart', {
@@ -55,7 +58,12 @@ app.controller("HomeController", function($scope, $http){
                         text: 'Monthly Average Temperature'
                     },
                     xAxis: {
-                        categories: dateArray
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
                     },
                     yAxis: {
                         title: {
@@ -69,6 +77,7 @@ app.controller("HomeController", function($scope, $http){
                             },
                             enableMouseTracking: true
                         }
+
                     },
                     series: [{
                         name: "Temperature",
@@ -90,7 +99,12 @@ app.controller("HomeController", function($scope, $http){
                         text: 'Monthly Average Pressure'
                     },
                     xAxis: {
-                        categories: dateArray
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
                     },
                     yAxis: {
                         title: {
@@ -125,7 +139,12 @@ app.controller("HomeController", function($scope, $http){
                         text: 'Monthly Average Wind'
                     },
                     xAxis: {
-                        categories: dateArray
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
                     },
                     yAxis: {
                         title: {
@@ -159,7 +178,12 @@ app.controller("HomeController", function($scope, $http){
                         text: 'Monthly Average Humidity'
                     },
                     xAxis: {
-                        categories: dateArray
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
                     },
                     yAxis: {
                         title: {
@@ -182,7 +206,25 @@ app.controller("HomeController", function($scope, $http){
             };
 
             $scope.searchRelatedStations = function(station){
-                console.log(station);
+                $http.get('http://api.openweathermap.org/data/2.5/find?q='+station+'&type=like&appid='+api_key)
+                .success(function(response){
+                    $scope.relatedStations = response;
+                })
+                .error(function(response){
+                    $scope.relatedStations = '';
+                });
+            };
+
+            $scope.addStation = function(station){
+                $http({
+                    url: '/weather-report/add-requested-station/',
+                    method: "POST",
+                    data: station,
+                    headers: {'Content-Type': 'application/json'}
+                })
+                .success(function(response){
+                    $window.location.href = "/weather-report/search-station/";                  
+                });
             };
 
         });

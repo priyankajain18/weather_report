@@ -1,7 +1,55 @@
-<br><br><br>
-<div class="row">
-    <div class="col-md-3 col-md-offset-4 form-group">
-        <input type="text" class="form-control" ng-model="station" id="add" placeholder="Add Station">
-    </div>
-    <button class="btn btn-primary col-md-1" ng-click="searchRelatedStations(station)">Add</button>
-</div>
+{% extends 'weather/index.html' %}
+    {% load static %}
+    {% load staticfiles %}
+    {% block 'title' %}
+        <title>Add Station | Weather Report</title>
+    {% endblock %}
+
+    {% block 'content' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <p class="add-txt">Add Station</p>
+                </div>
+                <br>
+                <div class="col-md-5">
+                    <a style="float: right" href="{% url 'search_station' %}" class="btn btn-default"><span class="add-btn">Search Station</span></a>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-3 form-group add-box">
+                    <input type="text" class="form-control" ng-model="station" id="add" placeholder="Add Station">
+                </div>
+                <button class="btn btn-success col-md-1" ng-click="searchRelatedStations(station)">Add</button>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="list-group col-md-6 related-stations-container">
+                <div ng-repeat="station in relatedStations.list" ng-show="relatedStations!==''" ng-model="station">
+                    <hr>
+                    <div style="height: 55px">
+                        <div class="col-md-3">
+                            <img src="{% static 'weather/images/' %}{$station.weather[0].icon$}.png">
+                        </div>
+                        <div class="col-md-19">
+                            <b class="inline-img"><a href="event.preventDefault();" ng-click="addStation(station)">{$ station.name $}, {$ station.sys.country $}</a></b>
+                            <span class="related-station">
+                                Temperature {$ station.main.temp $} K Pressure{$ station.main.pressure $} hpa Wind {$ station.wind.speed $} m/s
+                            </span>
+                            <span class="related-station">
+                                Coordinates [ {$ station.coord.lat $}, {$ station.coord.lon $} ]
+                            </span>
+                        </div>
+                    </div>
+                    <!--<a  style="height: 85px;" href="#"  class="list-group-item" ng-click="addStation(station)">
+                        <b class="inline-img">{$ station.name $}, {$ station.sys.country $}</b>
+                        <span style="display: block">Coordinates [{$ station.coord.lat $}, {$ station.coord.lon$}]</span>
+                    </a>-->
+
+                </div>
+                <h4 ng-show="relatedStations==''" class="error-txt">Oops! Station does not exist.</h4>
+            </div>
+        </div>
+    {% endblock %}
