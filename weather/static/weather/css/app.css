@@ -44,6 +44,9 @@
 .inline-img{
     display: inline !important;
 }
+.search-data{
+    margin-left: 4%;
+}
 
 /* Add Station Page CSS */
 .add-box{

@@ -55,7 +55,62 @@ app.controller("HomeController", function($scope, $http, $window){
                         type: 'line'
                     },
                     title: {
-                        text: 'Monthly Average Temperature'
+                        text: 'Average Temperature'
+                    },
+                    xAxis: {
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: false
+                            },
+                            enableMouseTracking: true
+                        }
+
+                    },
+                    series: [{
+                        name: "Temperature",
+                        data: temperatureArray
+                    },]
+                });
+
+            };
+
+            $scope.getFilteredTemperatureChartData = function(forecast){
+                var temperatureArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        t = (i.main.temp-273.15).toFixed(2); return Number(t);
+                    }
+                    else{
+                        return "";
+                    }
+                });
+                var dateArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.dt_txt;
+                    }
+                    else{
+                        return "";
+                    }
+                });
+
+                Highcharts.chart('filtered-temperature-chart', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Average Temperature'
                     },
                     xAxis: {
                         categories: dateArray,
@@ -96,7 +151,61 @@ app.controller("HomeController", function($scope, $http, $window){
                         type: 'line'
                     },
                     title: {
-                        text: 'Monthly Average Pressure'
+                        text: 'Average Pressure'
+                    },
+                    xAxis: {
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: false
+                            },
+                            enableMouseTracking: true
+                        }
+                    },
+                    series: [{
+                        name: "Pressure",
+                        data: pressureArray
+                    },]
+                });
+
+            };
+
+            $scope.getFilteredPressureChartData = function(forecast){
+                var pressureArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.main.pressure;
+                    }
+                    else{
+                        return "";
+                    }
+                });
+                var dateArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.dt_txt;
+                    }
+                    else{
+                        return"";
+                    }
+                });
+
+                Highcharts.chart('filtered-pressure-chart', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Average Pressure'
                     },
                     xAxis: {
                         categories: dateArray,
@@ -136,7 +245,60 @@ app.controller("HomeController", function($scope, $http, $window){
                         type: 'line'
                     },
                     title: {
-                        text: 'Monthly Average Wind'
+                        text: 'Average Wind'
+                    },
+                    xAxis: {
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: false
+                            },
+                            enableMouseTracking: true
+                        }
+                    },
+                    series: [{
+                        name: "Wind",
+                        data: windArray
+                    },]
+                });
+            };
+
+            $scope.getFilteredWindChartData = function(forecast){
+                var windArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.wind.speed;
+                    }
+                    else{
+                        return "";
+                    }
+                });
+                var dateArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.dt_txt;
+                    }
+                    else{
+                        return "";
+                    }
+                });
+
+                Highcharts.chart('filtered-wind-chart', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Average Wind'
                     },
                     xAxis: {
                         categories: dateArray,
@@ -175,7 +337,60 @@ app.controller("HomeController", function($scope, $http, $window){
                         type: 'line'
                     },
                     title: {
-                        text: 'Monthly Average Humidity'
+                        text: 'Average Humidity'
+                    },
+                    xAxis: {
+                        categories: dateArray,
+                        labels: {
+                            formatter: function() {
+                                return this.value.toString().substring(8, 10);
+                            },
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: ''
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: false
+                            },
+                            enableMouseTracking: true
+                        }
+                    },
+                    series: [{
+                        name: "Humidity",
+                        data: humidityArray
+                    },]
+                });
+            };
+
+            $scope.getFilteredHumidityChartData = function(forecast){
+                var humidityArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.main.humidity;
+                    }
+                    else{
+                        return "";
+                    }
+                });
+                var dateArray = _.map(forecast, function(i){
+                    if(i!==""){
+                        return i.dt_txt;
+                    }
+                    else{
+                        return "";
+                    }
+                });
+
+                Highcharts.chart('filtered-humidity-chart', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Average Humidity'
                     },
                     xAxis: {
                         categories: dateArray,
@@ -223,8 +438,27 @@ app.controller("HomeController", function($scope, $http, $window){
                     headers: {'Content-Type': 'application/json'}
                 })
                 .success(function(response){
-                    $window.location.href = "/weather-report/search-station/";                  
+                    $window.location.href = "/weather-report/search-station/";
                 });
+            };
+
+            $scope.filterForecastData = function(){
+                var start_date = angular.element("#start").val();
+                var end_date = angular.element("#end").val();
+
+                $scope.filterData = _.map($scope.forecast.list, function(i){
+                    var s_date = new Date(start_date);
+                    var e_date = new Date(end_date);
+                    var date = new Date(i.dt_txt);
+                    if(date >= s_date && date <= e_date){return i;}
+                    else{return "";}
+                });
+
+                $scope.getFilteredTemperatureChartData($scope.filterData);
+                $scope.getFilteredPressureChartData($scope.filterData);
+                $scope.getFilteredWindChartData($scope.filterData);
+                $scope.getFilteredHumidityChartData($scope.filterData);
+
             };
 
         });

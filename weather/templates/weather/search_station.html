@@ -6,6 +6,10 @@
         <title>Search Station | Weather Report</title>
     {% endblock %}
 
+    {% block 'extra_scripts' %}
+        {% include 'weather/extra_scripts.html' %}
+    {% endblock %}
+
     {% block 'content' %}
         <div class="container">
             <div class="row">
@@ -87,6 +91,59 @@
                         </div>
                         <div id="humidity" class="tab-pane fade">
                           <div id="humidity-chart"></div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="row" ng-show="showAllData" style="height: 450px">
+                <div class="col-md-12 search-data">
+                    <h2>View Calender Forecast</h2>
+                    <br>
+
+                    <div class="col-md-4">
+                        <h5>Start Date</h5>
+                        <div class="input-group date" id="start-date">
+                            <input type="text" class="form-control" id="start"/>
+                            <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h5>End Date</h5>
+                        <div class="input-group date" id="end-date">
+                            <input type="text" class="form-control" id="end"/>
+                            <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5>&nbsp;</h5>
+                        <button class="col-md-3 btn btn-primary" ng-click="filterForecastData()">View</button>
+                    </div>
+                </div>
+                <div class="col-md-6 search-data"><br><br>
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#filtered-temperature" data-toggle="tab">Temperature</a></li>
+                            <li><a href="#filtered-pressure" data-toggle="tab">Pressure</a></li>
+                            <li><a href="#filtered-wind" data-toggle="tab">Wind</a></li>
+                            <li><a href="#filtered-humidity" data-toggle="tab">Humidity</a></li>
+                        </ul>
+                    </div>
+                    <br><br><br><br>
+                    <div class="tab-content">
+                        <div id="filtered-temperature" class="tab-pane fade in active">
+                          <div id="filtered-temperature-chart"></div>
+                        </div>
+                        <div id="filtered-pressure" class="tab-pane fade">
+                          <div id="filtered-pressure-chart"></div>
+                        </div>
+                        <div id="filtered-wind" class="tab-pane fade">
+                          <div id="filtered-wind-chart"></div>
+                        </div>
+                        <div id="filtered-humidity" class="tab-pane fade">
+                          <div id="filtered-humidity-chart"></div>
                         </div>
                       </div>
                 </div>

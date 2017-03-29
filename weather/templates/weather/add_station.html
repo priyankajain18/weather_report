@@ -34,7 +34,7 @@
                             <img src="{% static 'weather/images/' %}{$station.weather[0].icon$}.png">
                         </div>
                         <div class="col-md-19">
-                            <b class="inline-img"><a href="event.preventDefault();" ng-click="addStation(station)">{$ station.name $}, {$ station.sys.country $}</a></b>
+                            <b class="inline-img"><a href="#event.preventDefault();" ng-click="addStation(station)">{$ station.name $}, {$ station.sys.country $}</a></b>
                             <span class="related-station">
                                 Temperature {$ station.main.temp $} K Pressure{$ station.main.pressure $} hpa Wind {$ station.wind.speed $} m/s
                             </span>
