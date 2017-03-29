@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'zenatix.urls'
+ROOT_URLCONF = 'weather_report.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'zenatix.wsgi.application'
+WSGI_APPLICATION = 'weather_report.wsgi.application'
 
 
 # Database
@@ -105,6 +105,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIFILES_DIR = (os.path.join(BASE_DIR, 'static'), )
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-#Open Weather Map Credentials
-API_KEY = ""

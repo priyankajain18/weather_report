@@ -1,5 +1,6 @@
 app.controller("HomeController", function($scope, $http, $window){
     $scope.showAllData = false;
+    $scope.showFilteredData = false;
 
     angular.element(document).ready(function () {
         $(document).ready(function() {
@@ -12,6 +13,7 @@ app.controller("HomeController", function($scope, $http, $window){
             $scope.$eventStationSelect = $(".station-dropdown");
             $scope.$eventStationSelect.on("select2:close", function (event){
                 $scope.showAllData = false;
+                $scope.showFilteredData = false;
 
                 if($scope.$eventStationSelect.val()){
                     $http.get('http://api.openweathermap.org/data/2.5/weather?id='+$scope.$eventStationSelect.val()+'&APPID='+api_key)
@@ -443,6 +445,7 @@ app.controller("HomeController", function($scope, $http, $window){
             };
 
             $scope.filterForecastData = function(){
+                $scope.showFilteredData = true;
                 var start_date = angular.element("#start").val();
                 var end_date = angular.element("#end").val();
 
