@@ -1,7 +1,7 @@
 # Weather Report
 Weather Report is a python project to fetch the current weather data and forecast weather data from Open Weather Map and to display its various parameters.
 
-***Installation***
+## Installation
 1. Initial Setup
 ```
 mkdir Project
