@@ -108,3 +108,4 @@ STATIC_URL = '/static/'
 STATIFILES_DIR = (os.path.join(BASE_DIR, 'static'), )
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+API_KEY = ""
