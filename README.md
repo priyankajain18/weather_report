@@ -51,3 +51,6 @@ Access http://127.0.0.1:8000/weather-report/
 ```
 ## Screenshots
 ![Current Weather Screenshot](https://github.com/priyankajain18/weather_report/blob/master/screenshots/screenshot1.png)
+![Weather Parameters Chart Screenshot](https://github.com/priyankajain18/weather_report/blob/master/screenshots/screenshot2.png)
+![Filtered Weather Forecast Data Screenshot](https://github.com/priyankajain18/weather_report/blob/master/screenshots/screenshot3.png)
+![Add Weather Station Screenshot](https://github.com/priyankajain18/weather_report/blob/master/screenshots/screenshot4.png)
