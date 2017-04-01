@@ -1,1 +1,1 @@
-web: gunicorn weather_report.wsgi --log-file -
+web: gunicorn blueberry-sundae-89728.wsgi --log-file -
