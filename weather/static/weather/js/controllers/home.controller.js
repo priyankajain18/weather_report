@@ -5,6 +5,12 @@ app.controller("HomeController", function($scope, $http, $window){
     angular.element(document).ready(function () {
         $(document).ready(function() {
 
+            $scope.showFilter = true;
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if(isSafari){
+                $scope.showFilter = false;
+            }
+
             $(".station-dropdown").select2({
                 theme: 'classic',
                 placeholder: 'Select a Station',
