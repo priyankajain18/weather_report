@@ -5,7 +5,7 @@ app.controller("HomeController", function($scope, $http, $window){
     angular.element(document).ready(function () {
 
         $scope.showFilter = true;
-        var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+	var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && !navigator.userAgent.match('CriOS');
         if(isSafari){
             $scope.showFilter = false;
         }
