@@ -49,6 +49,10 @@ python manage.py collectstatic
 python manage.py runserver
 Access http://127.0.0.1:8000/weather-report/
 ```
+
+8. Live
+http://weather-forecast-report.herokuapp.com/weather-report/
+
 ## Screenshots
 ![Current Weather Screenshot](https://github.com/priyankajain18/weather_report/blob/master/screenshots/screenshot1.png)
 ---
